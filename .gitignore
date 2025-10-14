@@ -1,0 +1,41 @@
+# === Python cache ===
+__pycache__/
+*.py[cod]
+*$py.class
+
+# === Virtual environments ===
+venv/
+.env/
+.env.bak/
+.env.local/
+
+# === Environment & config ===
+*.env
+*.ini
+config/settings.json
+
+# === Pytest cache and coverage ===
+.pytest_cache/
+.coverage
+htmlcov/
+
+# === Data & output ===
+output/
+*.csv
+*.json
+*.xlsx
+*.pdf
+*.log
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Streamlit / cache ===
+.streamlit/

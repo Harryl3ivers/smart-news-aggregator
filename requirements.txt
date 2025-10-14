@@ -1,0 +1,12 @@
+# === Core dependencies ===
+requests
+python-dotenv
+textblob
+
+# === Data analysis and visualization ===
+pandas
+matplotlib
+
+# === Testing ===
+pytest
+pytest-mock
