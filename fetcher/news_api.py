@@ -7,8 +7,8 @@ import os
 
 def fetch_articles(topic):
     load_dotenv()
-    print("Loaded API key:", os.getenv("NEWS_API_KEY"))
-    NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+    print("Loaded API key:", os.getenv("NEWS_API_KEY",))
+    NEWS_API_KEY = os.getenv("NEWS_API_KEY","").strip()
 
     if not NEWS_API_KEY:
         raise ValueError("API key not found. Please set the NEWS_API_KEY environment variable.")
@@ -16,6 +16,7 @@ def fetch_articles(topic):
     url = f"https://newsapi.org/v2/everything?q={topic}&apiKey={NEWS_API_KEY}"
     response = requests.get(url)
     data = response.json()
+    articles = data.get("articles")
 
     if "articles" not in data:
         raise ValueError("Error fetching articles. Please check your API key and topic.")

@@ -13,6 +13,11 @@ def fetch_current_news(topic):
     url = f"https://api.currentsapi.services/v1/search?keywords={topic}&apiKey={CURRENTS_NEWS_API_KEY}"
     response = requests.get(url)
     data = response.json()
+
+
+    if "news" not in data:
+        print("⚠️ Unexpected response from Currents API:", data)
+        return []
     
     articles = data["news"]
     first_ten_articles = articles[:10]
