@@ -26,7 +26,7 @@ def aggregate_news(topic):
         print(f"Error fetching from News API: {e}")
     
     articles = [i for i in articles if validate_article(i)]
-    article = duplicate_articles(articles)
+    articles = duplicate_articles(articles)
     analysed_articles = analyse_article(articles)
     for article in analysed_articles:
         if "category" not in article:
