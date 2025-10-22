@@ -11,5 +11,6 @@ def categorise_article(article):
         if any(word in text.lower() for word in keyword):
             return category
     return "General"
-     
+
+
  

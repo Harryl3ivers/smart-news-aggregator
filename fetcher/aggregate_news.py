@@ -5,6 +5,7 @@ from fetcher.categorise_article import categorise_article
 from datetime import datetime, timedelta
 from fetcher.duplicate_articles import duplicate_articles
 from fetcher.summariser import generate_summary
+
 from datetime import datetime
 
 
@@ -40,6 +41,7 @@ def aggregate_news(topic):
         except Exception:
             article["parsed_date"] = datetime.min.date()    
     analysed_articles.sort(key=lambda x: x["parsed_date"],reverse=True) # sort articles by date newsest first
+
 
     for article in analysed_articles:
         content = article.get("title") or article.get("description") or article.get("category")

@@ -4,7 +4,7 @@ import os
 
 def fetch_current_news(topic):
     load_dotenv()
-    CURRENTS_NEWS_API_KEY = os.getenv("CURRENTS_NEWS_API_KEY")
+    CURRENTS_NEWS_API_KEY = os.getenv("CURRENTS_NEWS_API_KEY","").strip()
     print("Loaded API key:", os.getenv("CURRENTS_NEWS_API_KEY"))
 
     if not CURRENTS_NEWS_API_KEY:
