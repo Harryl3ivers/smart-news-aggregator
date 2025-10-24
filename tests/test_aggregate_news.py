@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch
 from fetcher.aggregate_news import aggregate_news
+from datetime import datetime
 
 @patch('fetcher.aggregate_news.fetch_articles')
 @patch('fetcher.aggregate_news.fetch_current_news')
@@ -167,4 +168,29 @@ def test_empty_responses_both_apis(mock_news_api,mock_current_news):
     mock_current_news.return_value = fake_current_news_response
     result = aggregate_news("AI")
     assert len(result) == 0, "No articles should be returned for empty API responses"
-     
+
+ 
+
+
+@patch('fetcher.aggregate_news.fetch_articles')
+@patch('fetcher.aggregate_news.fetch_current_news')
+def test_invalid_date_formats_fallback_to_min_date(mock_current_news, mock_news_api):
+    """Test that invalid dates fall back to datetime.min.date()."""
+    
+    invalid_date = "not-a-date"  # just one example
+
+    fake_articles = [{
+        "title": "Test Article",
+        "description": "Description",
+        "date": invalid_date
+    }]
+    
+    mock_news_api.return_value = fake_articles
+    mock_current_news.return_value = []
+    
+    result = aggregate_news("test")
+    
+    assert len(result) == 1, "Article should still be processed"
+    assert result[0]["parsed_date"] == datetime.min.date(), (
+        f"Invalid date '{invalid_date}' should fallback to datetime.min.date()"
+    )

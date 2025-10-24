@@ -24,4 +24,3 @@ def test_duplication_with_similar_titles():
 
    
 
-    #find out the difference between doing it like this and using patch to mock api calls
