@@ -150,3 +150,21 @@ def test_pipeline_with_api_failure(mock_news_api,mock_current_news):
     assert result[0]["title"] == "AI model released to help with climate change"
      
    
+@patch('fetcher.aggregate_news.fetch_articles')
+@patch('fetcher.aggregate_news.fetch_current_news')
+def test_pipeline_with_both_apis_failure(mock_news_api,mock_current_news):
+    mock_news_api.side_effect = Exception("News API failure")
+    mock_current_news.side_effect = Exception("Current News API failure")
+    result = aggregate_news("AI")
+    assert len(result) == 0, "No articles should be returned when both APIs fail"
+
+@patch('fetcher.aggregate_news.fetch_articles')
+@patch('fetcher.aggregate_news.fetch_current_news')
+def test_empty_responses_both_apis(mock_news_api,mock_current_news):
+    fake_news_api_response = []
+    fake_current_news_response = []
+    mock_news_api.return_value = fake_news_api_response
+    mock_current_news.return_value = fake_current_news_response
+    result = aggregate_news("AI")
+    assert len(result) == 0, "No articles should be returned for empty API responses"
+     
